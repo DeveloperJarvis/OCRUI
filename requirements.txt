@@ -1,0 +1,5 @@
+# Add your dependencies here
+Flask
+Flask-WTF
+requests
+Werkzeug

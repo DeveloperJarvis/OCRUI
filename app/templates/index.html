@@ -1,0 +1,28 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="ui-wrapper">
+  <div class="left-panel">
+    <form method="POST" enctype="multipart/form-data">
+      {{ form.hidden_tag() }}
+      {{ form.uploaded_image.label }}<br>
+      {{ form.uploaded_image() }}<br><br>
+      {{ form.submit() }}
+    </form>
+    {% if image_filename %}
+      <h4>Current Upload:</h4>
+      <img src="{{ url_for('static', filename='images/' ~ image_filename) }}" width="300">
+    {% endif %}
+
+    <h4>Previous Uploads:</h4>
+    {% for img in prev_images %}
+      <img src="{{ url_for('static', filename='images/' ~ img) }}" width="100">
+    {% endfor %}
+  </div>
+
+  <div class="right-panel">
+    <h4>API Response</h4>
+    <pre>{{ response_json | tojson(indent=2) if response_json else 'No data' }}</pre>
+  </div>
+</div>
+{% endblock %}
